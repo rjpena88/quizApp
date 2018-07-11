@@ -13,13 +13,14 @@ const routes: Routes = [
   },
   {
     path: "questions/:id",
+    component: QuestionsComponent
   },
   {
     path: "results",
     component: ResultsComponent
   },
   {
-    //Default Path routing
+    //Default Path Routing
     path: "",
     redirectTo: "/",
     pathMatch: "full"
