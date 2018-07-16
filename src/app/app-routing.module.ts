@@ -9,7 +9,7 @@ import { ResultsComponent } from './results/results.component';
 const routes: Routes = [
   // Routes go here
   {
-    path: "./",
+    path: "",
     component: HomeComponent
   },
   {
