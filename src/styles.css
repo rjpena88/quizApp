@@ -1,0 +1,122 @@
+.btn{
+    border-radius: 0;
+}
+
+.option{
+    background-color:hsl(50, 100%, 50%);
+    font-size:20px;
+    padding:10px;
+    margin:3px;
+}
+    #quiz .options input[type=checkbox] {
+        height:22px;
+        width:22px;
+    }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.result-question{
+    /* background-color:#eee; */
+    margin:4px;
+    padding:6px;
+}
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+.font-courier {
+    font-family: 'Courier', sans-serif;
+}
+.font-jos {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+@media only screen and (max-width: 480px) {
+    h1,.h1{
+        font-size:22px;
+    }
+    h2,.h2{
+        font-size:20px;
+    }
+    h3,.h3{
+        font-size:18px;
+    }
+    .option {
+        font-size: 16px;
+        padding: 6px;
+    }
+}
+* { box-sizing: border-box; }
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#vidtop-content {
+	top: 0;
+	color: #fff;
+}
+.vid-info { position: absolute; top: 0; right: 0; width: 33%; background: rgba(0,0,0,0.3); color: #fff; padding: 1rem; font-family: Avenir, Helvetica, sans-serif; }
+.vid-info h1 { font-size: 2rem; font-weight: 700; margin-top: 0; line-height: 1.2; }
+.vid-info a { display: block; color: #fff; text-decoration: none; background: rgba(0,0,0,0.5); transition: .6s background; border-bottom: none; margin: 1rem auto; text-align: center; }
+@media (min-aspect-ratio: 16/9) {
+  .video-foreground { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-foreground { width: 300%; left: -100%; }
+}
+@media all and (max-width: 600px) {
+.vid-info { width: 50%; padding: .5rem; }
+.vid-info h1 { margin-bottom: .2rem; }
+}
+@media all and (max-width: 500px) {
+.vid-info .acronym { display: none; }
+}
+
+.title {
+  border-radius: 25px;
+  margin-top: 100px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  background-color: bisque;
+  opacity: 0.7;
+  padding: 25px;
+}
+.question-bg {
+    border-radius: 25px;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    background: hsla(40, 100%, 67%, 0.545);
+    padding: 25px;
+  }
+
+.button {
+  text-align: center;
+  margin: 100px;
+  padding: 20px;
+  font-weight: bold;
+  
+}
+
+a {
+  background-color: bisque;
+  opacity: 0.9;
+
+}
+.quiz-margin {
+    margin-left: 15%;
+    margin-right: 15%;
+}
