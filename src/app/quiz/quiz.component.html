@@ -1,0 +1,93 @@
+<div class="video-background">
+  <div class="video-foreground">
+    <iframe src="https://www.youtube.com/embed/4DTO4uHRKqQ?controls=0&showinfo=0&mute=1&rel=0&autoplay=1&loop=1&playlist=4DTO4uHRKqQ"
+      frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<div class="row">
+</div>
+<div id="quiz">
+  <h2 class="text-center font-orbitron font-weight-normal mt-4 text-white shadow">What's your EXTREME I.Q.?</h2>
+  <hr />
+
+  <!-- HOME MODE -->
+  <div *ngIf="mode=='home'">
+    <div class="container">
+      <h1 class="title">What's Your EXTREME I.Q?</h1>
+      <div class="button">
+        <a class="btn btn-outline-danger shadow rounded btn-lg text-white" role="button" (click)="mode = 'quiz'">Begin Quiz!</a>
+
+        <!-- <button type=" button " class="btn btn-outline-danger btn-lg font-weight-bold">Begin Test</button> -->
+      </div>
+
+    </div>
+
+  </div>
+  <!-- QUIZ MODE -->
+  <div>
+    <div *ngIf="mode=='quiz' && quiz" class="quiz-margin question-bg">
+      <div *ngFor="let question of filteredQuestions;">
+        <!-- question tally -->
+        <div class="badge badge-danger d-flex shadow justify-content-center py-2">Question {{pager.index + 1}} of {{pager.count}}.</div>
+        <!-- timer - NOT IMPLEMENTED -->
+        <!-- <div *ngIf="config.duration" class="badge badge-info">Time: {{ellapsedTime}} / {{duration}}</div> -->
+        <!-- question name and number -->
+        <h3 class="font-weight-normal font-jos text-center py-3 text-white shadow">{{pager.index + 1}}.
+          <span [innerHTML]="question.name"></span>
+        </h3>
+        <div class="row text-left options">
+          <div class="col-6" *ngFor="let option of question.options">
+            <!-- code for answer choice boxes starts here -->
+            <div class="option rounded">
+              <label class="font-weight-normal d-flex font-courier" [attr.for]="option.id">
+                <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" /> {{option.name}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="text-center">
+        <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0);">First</button> -->
+      </div>
+<!-- PREVIOUS AND NEXT BUTTONS -->
+      <button class="btn btn-danger rounded-left" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+      <button class="btn btn-success rounded-right" (click)="goTo(pager.index + 1);">Next</button>
+      <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Last</button> -->
+      <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
+    </div>
+  </div>
+
+  <!-- REVIEW MODE -->
+
+  <div class="row text-center" *ngIf="mode=='review'">
+    <div class="col-4 cursor-pointer" *ngFor="let question of quiz.questions; let index = index;">
+      <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+    </div>
+  </div>
+
+  <!-- RESULTS MODE -->
+
+  <div class="result text-center question-bg quiz-margin" *ngIf="mode=='result'">
+    <h2 class="text-white">Quiz Result</h2>
+    <div *ngFor="let question of quiz.questions; let index = index">
+      <div class="result-question text-white">
+        <h5>{{index + 1}}. {{question.name}}</h5>
+        <div class="row">
+          <div class="col-6" *ngFor="let Option of question.options">
+            <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
+          </div>
+        </div>
+        <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+      </div>
+    </div>
+    <h4 class="alert alert-info text-center">You may close this window now.</h4>
+  </div>
+  <hr />
+  <div *ngIf="mode!='result'" class="d-flex justify-content-center">
+    <button class="btn btn-default" (click)="mode = 'quiz'">Quiz</button>
+    <button class="btn btn-info" (click)="mode = 'review'">Review</button>
+    <button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+  </div>
+</div>
