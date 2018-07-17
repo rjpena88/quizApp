@@ -1,0 +1,64 @@
+.shadow {
+    text-shadow: 2px 2px 4px #000000;
+}
+.title {
+    border-radius: 25px;
+    margin-top: 100px;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    background-color: bisque;
+    opacity: 0.7;
+    padding: 25px;
+    -webkit-animation: colorchange 10s infinite alternate;
+}
+@-webkit-keyframes colorchange {
+  0% {
+    color: #f1c40f;
+  }
+  10% {
+    color: #8d44ad73;
+  }
+  20% {
+    color: #1abc9c;
+  }
+  30% {
+    color: #d35400;
+  }
+  40% {
+    color: rgba(0, 0, 255, 0.185);
+  }
+  50% {
+    color: #34495e42;
+  }
+  60% {
+    color: #edf10f;
+  }
+  70% {
+    color: #2980b9;
+  }
+  80% {
+    color: #f1c40f;
+  }
+  90% {
+    color: #2980b9;
+  }
+  100% {
+    color: pink;
+  }
+}
+
+
+  
+  .button {
+    text-align: center;
+    margin: 100px;
+    padding: 20px;
+    font-weight: bold;
+    
+  }
+  
+  a {
+    background-color: bisque;
+    opacity: 0.9;
+  }
