@@ -66,6 +66,7 @@
 
   <div class="result question-bg quiz-margin shadow" *ngIf="mode=='result'">
     <h2 class="text-white">Quiz Result</h2>
+    <div>Here's your Score! {{ tally  }}</div>
     <div *ngFor="let question of quiz.questions; let index = index">
       <div class="result-question text-white">
         <h5>{{index + 1}}. {{question.name}}</h5>
