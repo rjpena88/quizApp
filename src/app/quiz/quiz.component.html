@@ -8,13 +8,13 @@
 <div class="row">
 </div>
 <div id="quiz">
-  <h2 class="text-center font-orbitron font-weight-normal mt-4 text-white shadow">What's your EXTREME I.Q.?</h2>
+  <h2 class="text-center font-orbitron font-weight-normal mt-4 text-white shadow">What's your random trivia I.Q.?</h2>
   <hr />
 
   <!-- HOME MODE -->
   <div *ngIf="mode=='home'">
     <div class="container">
-      <h1 class="title">What's Your EXTREME I.Q?</h1>
+      <h1 class="title shadow">What's your random trivia I.Q.?</h1>
       <div class="button">
         <a class="btn btn-outline-danger shadow rounded btn-lg text-white" role="button" (click)="mode = 'quiz'">Begin Quiz!</a>
 
@@ -54,8 +54,6 @@
 <!-- PREVIOUS AND NEXT BUTTONS -->
       <button class="btn btn-danger rounded-left" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
       <button class="btn btn-success rounded-right" (click)="goTo(pager.index + 1);">Next</button>
-      <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Last</button> -->
-      <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
     </div>
   </div>
 
@@ -69,7 +67,7 @@
 
   <!-- RESULTS MODE -->
 
-  <div class="result text-center question-bg quiz-margin" *ngIf="mode=='result'">
+  <div class="result text-center question-bg quiz-margin shadow" *ngIf="mode=='result'">
     <h2 class="text-white">Quiz Result</h2>
     <div *ngFor="let question of quiz.questions; let index = index">
       <div class="result-question text-white">
@@ -79,12 +77,14 @@
             <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
           </div>
         </div>
-        <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+        <div class="text-white p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
       </div>
     </div>
+    
     <h4 class="alert alert-info text-center">You may close this window now.</h4>
   </div>
   <hr />
+  <!-- TEST NAV BUTTONS -->
   <div *ngIf="mode!='result'" class="d-flex justify-content-center">
     <button class="btn btn-default" (click)="mode = 'quiz'">Quiz</button>
     <button class="btn btn-info" (click)="mode = 'review'">Review</button>

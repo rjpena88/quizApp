@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from '../services/quiz.service';
 import { HelperService } from '../services/helper.service';
-import { Option, Question, Quiz, } from '../models/index';
+import { Option, Question, Quiz, QuizConfig} from '../models/index';
 
 @Component({
   selector: 'app-quiz',
