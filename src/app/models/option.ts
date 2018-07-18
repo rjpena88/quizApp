@@ -4,6 +4,7 @@ export class Option {
     name: string;
     isAnswer: boolean;
     selected: boolean;
+    tally: any[];
 
     constructor(data: any) {
         data = data || {};
