@@ -14,11 +14,9 @@
   <!-- HOME MODE -->
   <div *ngIf="mode=='home'">
     <div class="container">
-      <h1 class="title shadow">What's your random trivia I.Q.?</h1>
+      <h3 class="title shadow">Click the button below to find out your random trivia I.Q.! You only have 2 minutes from when you load this page!</h3>
       <div class="button">
         <a class="btn btn-outline-danger shadow rounded btn-lg text-white" role="button" (click)="mode = 'quiz'">Begin Quiz!</a>
-
-        <!-- <button type=" button " class="btn btn-outline-danger btn-lg font-weight-bold">Begin Test</button> -->
       </div>
 
     </div>
@@ -31,7 +29,7 @@
         <!-- question tally -->
         <div class="badge badge-danger d-flex shadow justify-content-center py-2">Question {{pager.index + 1}} of {{pager.count}}.</div>
         <!-- timer - NOT IMPLEMENTED -->
-        <!-- <div *ngIf="config.duration" class="badge badge-info">Time: {{ellapsedTime}} / {{duration}}</div> -->
+        <div *ngIf="config.duration" class="badge badge-danger">Time: {{ellapsedTime}} / {{duration}}</div>
         <!-- question name and number -->
         <h3 class="font-weight-normal font-jos text-center py-3 text-white shadow">{{pager.index + 1}}.
           <span [innerHTML]="question.name"></span>
@@ -49,11 +47,10 @@
       </div>
       <hr />
       <div class="text-center">
-        <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0);">First</button> -->
       </div>
 <!-- PREVIOUS AND NEXT BUTTONS -->
-      <button class="btn btn-danger rounded-left" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
-      <button class="btn btn-success rounded-right" (click)="goTo(pager.index + 1);">Next</button>
+      <button class="btn btn-danger rounded-left shadow" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+      <button class="btn btn-success rounded-right shadow" (click)="goTo(pager.index + 1);">Next</button>
     </div>
   </div>
 
@@ -61,27 +58,27 @@
 
   <div class="row text-center" *ngIf="mode=='review'">
     <div class="col-4 cursor-pointer" *ngFor="let question of quiz.questions; let index = index;">
-      <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+      <div (click)="goTo(index)" class="text-white shadow rounded p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
     </div>
   </div>
 
   <!-- RESULTS MODE -->
 
-  <div class="result text-center question-bg quiz-margin shadow" *ngIf="mode=='result'">
+  <div class="result question-bg quiz-margin shadow" *ngIf="mode=='result'">
     <h2 class="text-white">Quiz Result</h2>
     <div *ngFor="let question of quiz.questions; let index = index">
       <div class="result-question text-white">
         <h5>{{index + 1}}. {{question.name}}</h5>
-        <div class="row">
+        <div class="row text-left">
           <div class="col-6" *ngFor="let Option of question.options">
             <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
           </div>
         </div>
-        <div class="text-white p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+        <div class="text-white p-1 m-4 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
       </div>
     </div>
     
-    <h4 class="alert alert-info text-center">You may close this window now.</h4>
+    <h4 class="alert alert-info text-center text-white"><A HREF="javascript:history.go(0)">Click to reload the quiz!</A></h4>
   </div>
   <hr />
   <!-- TEST NAV BUTTONS -->
