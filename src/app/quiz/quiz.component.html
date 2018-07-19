@@ -28,10 +28,10 @@
       <div *ngFor="let question of filteredQuestions;">
         <!-- question tally -->
         <div class="badge badge-danger d-flex shadow justify-content-center py-2">Question {{pager.index + 1}} of {{pager.count}}.</div>
-        <!-- timer - NOT IMPLEMENTED -->
+        <!-- timer -->
         <div *ngIf="config.duration" class="badge badge-danger">Time: {{ellapsedTime}} / {{duration}}</div>
         <!-- question name and number -->
-        <h3 class="font-weight-normal font-jos text-center py-3 text-white shadow">{{pager.index + 1}}.
+        <h3 class="font-jos text-center py-3 text-white shadow">{{pager.index + 1}}.
           <span [innerHTML]="question.name"></span>
         </h3>
         <div class="row text-left options">
