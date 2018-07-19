@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { QuizService } from '../services/quiz.service';
-import { HelperService } from '../services/helper.service';
 import { Option, Question, Quiz, QuizConfig} from '../models/index';
+
 
 @Component({
   selector: 'app-quiz',
@@ -11,7 +10,7 @@ import { Option, Question, Quiz, QuizConfig} from '../models/index';
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
-  tally: 0;
+  tally = 0;
   quizes: any[];
   quiz: Quiz = new Quiz(null);
   mode = 'home';
@@ -19,22 +18,18 @@ export class QuizComponent implements OnInit {
   config: QuizConfig = {
     'allowBack': true,
     'allowReview': true,
-    'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 60,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'autoMove': true,  // if true, it will move to next question automatically when answered.
+    'duration': 120,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
-    'requiredAll': false,  // indicates if you must answer all the questions before submitting.
+    'requiredAll': true,  // indicates if you must answer all the questions before submitting.
     'richText': false,
-    'shuffleQuestions': false,
+    'shuffleQuestions': true,
     'shuffleOptions': false,
-    'showClock': false,
+    'showClock': true,
     'showPager': true,
     'theme': 'none'
   };
 
-// This will be gloable variable for TALLY
-
-
-  // Figure this out
   pager = {
     index: 0,
     size: 1,
@@ -90,6 +85,7 @@ export class QuizComponent implements OnInit {
 
   // Checking if it's selected
   onSelect(question: Question, option: Option) {
+    console.log(this.tally);
     // let tally = question.tally;
     if (question.questionTypeId === 1) {
       question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
@@ -97,29 +93,13 @@ export class QuizComponent implements OnInit {
       // console.log(this.tally);
       
     }
-    // console.log("this is the ALL options")
 
-  //   for (var i = 0; i < a.length; i++) {
-  //     if (a[i] == 1) a.push(5);
-  //     console.log(a[i]);
-  // }
-    
-  //   console.log(question.options);
     if(question.questionTypeId === 1){
       question.options.forEach((answer) => { 
         if(answer.selected == true && answer.isAnswer == true){
           this.tally++;
-          console.log(this.tally);
-          // console.log("This is the Correct ANSWER!!!")
-          // console.log(answer);
-          // question.tally.push(answer.name);
-          // console.log("I am the tally");
-          // console.log(question.tally);
+          // console.log(this.tally);
 
-          
-          // this.tally = answer;
-          // console.log("this is the TALLY");
-          // console.log(this.tally)
 
       }
     })
@@ -146,40 +126,93 @@ export class QuizComponent implements OnInit {
   };
 
   isCorrect(question: Question) {
-    // let result2 = question.tally;
-    // let result = [];
-    // return "hey";
-    let optionTest = question.options;
+
+  let optionTest = question.options;
   //  return question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
    let style = question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
   //  console.log(x);
    return style;
 
-    // let test = question.options;
-    // console.log(test);
-    // return style;
-
-    
-    
-    // console.log(x);
   };
 
   onSubmit() {
-    // let answers = [];
-    // let tally = [];
-    // console.log("this is FIRST QUESTION");
-    // let optionsTarget = this.quiz.questions[0];
-    // console.log("this is the Target Log");
-    // console.log( optionsTarget);
-    // console.log(this.quiz.questions.options[0]);
-    // this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
-    // If this.quiz.questions.
-    // this.quiz.questions.forEach(a => tally.push({ 'options': this.quiz.questions.options,  }));
-    // console.log("This is the new answers array");
-    // console.log(answers);
-
-    // Post your data to the server here. answers contains the questionId and the users' answer.
-    // console.log(this.quiz.questions);
+ 
     this.mode = 'result';
   }
+}
+var chart = AmCharts.makeChart("chartdiv", {
+  "theme": "light",
+  "type": "gauge",
+  "axes": [{
+    // inner circle
+    "id": "axis1",
+    "labelsEnabled": false,
+    "axisColor": "#808080",
+    "axisAlpha": 1,
+    "tickAlpha": 0,
+    "radius": "20%",
+    "startAngle": 0,
+    "endAngle": 360,
+    "topTextFontSize": 20,
+    "topTextYOffset": 140,
+    "topText": "Goal: 4.0"
+  }, {
+    // red ticks
+    "id": "axis2",
+    "endAngle": 70,
+    "endValue": 400,
+    "radius": "100%",
+    "axisAlpha": 0,
+    "axisThickness": 0,
+    "valueInterval": 4,
+    "minorTickInterval": 4,
+    "tickColor": "#ff0000",
+    "tickLength": 40,
+    "labelsEnabled": true,
+    "labelFrequency": 100,
+    "labelFunction": createLabel,
+    // text inside center circle
+    "topTextFontSize": 20,
+    "topTextYOffset": 130,
+    "topTextColor": "#808080",
+  }, {
+    // green ticks
+    "id": "axis2",
+    "startAngle": 70,
+    "startValue": 400,
+    "endValue": 500,
+    "radius": "100%",
+    "valueInterval": 4,
+    "minorTickInterval": 4,
+    "axisAlpha": 0,
+    "axisThickness": 0,
+    "tickColor": "#006600",
+    "tickLength": 40,
+    "labelsEnabled": true,
+    "labelFrequency": 25,
+    "labelFunction": createLabel,
+  }],
+  "arrows": [{
+    "axis": "axis2",
+    "color": "#808080",
+    "innerRadius": "20%",
+    "nailRadius": 10,
+    "radius": "70%"
+  }],
+  "export": {
+    "enabled": true
+  }
+});
+
+setInterval(randomValue, 2000);
+
+// set random value
+function randomValue() {
+  var value = Math.round(Math.random() * 500);
+  chart.arrows[0].setValue(value);
+  chart.axes[1].setTopText(value / 100);
+}
+
+function createLabel(value) {
+  return value / 100.0
 }

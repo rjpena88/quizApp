@@ -66,15 +66,19 @@
 
   <div class="result question-bg quiz-margin shadow" *ngIf="mode=='result'">
     <h2 class="text-white">Quiz Result</h2>
+    <hr>
+    <div class="text-white">You got {{ tally }} out of 10 right!</div>
+    <hr>
+    <div id="chartdiv"></div>		
     <div *ngFor="let question of quiz.questions; let index = index">
       <div class="result-question text-white">
         <h5>{{index + 1}}. {{question.name}}</h5>
         <div class="row text-left">
-          <div class="col-6" *ngFor="let Option of question.options">
+          <div class="col-6 pl-5" *ngFor="let Option of question.options">
             <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
           </div>
         </div>
-        <div class="text-white p-1 m-4 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+        <div class="text-white m-4 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
       </div>
     </div>
     
