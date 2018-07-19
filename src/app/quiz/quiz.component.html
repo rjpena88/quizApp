@@ -27,7 +27,7 @@
     <div *ngIf="mode=='quiz' && quiz" class="quiz-margin question-bg">
       <div *ngFor="let question of filteredQuestions;">
         <!-- question tally -->
-        <div class="badge badge-danger d-flex shadow justify-content-center py-2">Question {{pager.index + 1}} of {{pager.count}}.</div>
+        <div class="badge badge-danger d-flex shadow justify-content-center py-2 mb-2">Question {{pager.index + 1}} of {{pager.count}}.</div>
         <!-- timer -->
         <div *ngIf="config.duration" class="badge badge-danger">Time: {{ellapsedTime}} / {{duration}}</div>
         <!-- question name and number -->
@@ -68,8 +68,8 @@
     <h2 class="text-white">Quiz Result</h2>
     <hr>
     <div class="text-white">You got {{ tally }} out of 10 right!</div>
-    <hr>
-    <div id="chartdiv"></div>		
+    <meter id="meter" value="{{ tally }}" max="10" min="0" high="7.5" low="2.5"></meter>
+    <hr>	
     <div *ngFor="let question of quiz.questions; let index = index">
       <div class="result-question text-white">
         <h5>{{index + 1}}. {{question.name}}</h5>

@@ -63,3 +63,14 @@
     background-color: bisque;
     opacity: 0.9;
   }
+
+  /*  METER Style  */
+  #meter {
+    padding-top: 15px;
+    margin: 0 auto 4.5em;
+    width: 250px;
+    height: 50px;
+    display: block;
+    border: 2px gray;
+    border-radius: 5px;
+  }
