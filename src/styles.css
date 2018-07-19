@@ -120,3 +120,8 @@ a {
     margin-left: 15%;
     margin-right: 15%;
 }
+#chartdiv {
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+  }

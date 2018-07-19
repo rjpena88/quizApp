@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { QuizService } from '../services/quiz.service';
-import { HelperService } from '../services/helper.service';
 import { Option, Question, Quiz, QuizConfig} from '../models/index';
+
 
 @Component({
   selector: 'app-quiz',
@@ -19,22 +18,18 @@ export class QuizComponent implements OnInit {
   config: QuizConfig = {
     'allowBack': true,
     'allowReview': true,
-    'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 60,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'autoMove': true,  // if true, it will move to next question automatically when answered.
+    'duration': 120,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
-    'requiredAll': false,  // indicates if you must answer all the questions before submitting.
+    'requiredAll': true,  // indicates if you must answer all the questions before submitting.
     'richText': false,
-    'shuffleQuestions': false,
+    'shuffleQuestions': true,
     'shuffleOptions': false,
-    'showClock': false,
+    'showClock': true,
     'showPager': true,
     'theme': 'none'
   };
 
-// This will be gloable variable for TALLY
-
-
-  // Figure this out
   pager = {
     index: 0,
     size: 1,
@@ -144,4 +139,80 @@ export class QuizComponent implements OnInit {
  
     this.mode = 'result';
   }
+}
+var chart = AmCharts.makeChart("chartdiv", {
+  "theme": "light",
+  "type": "gauge",
+  "axes": [{
+    // inner circle
+    "id": "axis1",
+    "labelsEnabled": false,
+    "axisColor": "#808080",
+    "axisAlpha": 1,
+    "tickAlpha": 0,
+    "radius": "20%",
+    "startAngle": 0,
+    "endAngle": 360,
+    "topTextFontSize": 20,
+    "topTextYOffset": 140,
+    "topText": "Goal: 4.0"
+  }, {
+    // red ticks
+    "id": "axis2",
+    "endAngle": 70,
+    "endValue": 400,
+    "radius": "100%",
+    "axisAlpha": 0,
+    "axisThickness": 0,
+    "valueInterval": 4,
+    "minorTickInterval": 4,
+    "tickColor": "#ff0000",
+    "tickLength": 40,
+    "labelsEnabled": true,
+    "labelFrequency": 100,
+    "labelFunction": createLabel,
+    // text inside center circle
+    "topTextFontSize": 20,
+    "topTextYOffset": 130,
+    "topTextColor": "#808080",
+  }, {
+    // green ticks
+    "id": "axis2",
+    "startAngle": 70,
+    "startValue": 400,
+    "endValue": 500,
+    "radius": "100%",
+    "valueInterval": 4,
+    "minorTickInterval": 4,
+    "axisAlpha": 0,
+    "axisThickness": 0,
+    "tickColor": "#006600",
+    "tickLength": 40,
+    "labelsEnabled": true,
+    "labelFrequency": 25,
+    "labelFunction": createLabel,
+  }],
+  "arrows": [{
+    "axis": "axis2",
+    "color": "#808080",
+    "innerRadius": "20%",
+    "nailRadius": 10,
+    "radius": "70%"
+  }],
+  "export": {
+    "enabled": true
+  }
+});
+
+setInterval(randomValue, 2000);
+
+// set random value
+function randomValue() {
+  var value = Math.round(Math.random() * 500);
+  chart.arrows[0].setValue(value);
+  chart.axes[1].setTopText(value / 100);
+}
+
+function createLabel(value) {
+  return value / 100.0
 }
